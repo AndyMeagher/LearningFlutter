@@ -1,3 +1,4 @@
+import 'package:LearningFlutter/settings_view.dart';
 import 'package:flutter/material.dart';
 
 import 'cases_view.dart';
@@ -15,7 +16,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _children = [
     PlaceholderWidget(Colors.deepOrange),
     CasesView(),
-    PlaceholderWidget(Colors.green)
+    SettingsView()
   ];
 
   @override
