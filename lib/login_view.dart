@@ -17,7 +17,7 @@ class LoginView extends StatelessWidget {
       ///onModelReady: (model) => model.loadData(),
       builder: (context, model, child) => Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: const EdgeInsets.all(24.0),
           child: Center(
               child: Form(
                 key: _formKey,
@@ -95,7 +95,7 @@ class LoginView extends StatelessWidget {
                             onPressed: () {},
                             color: Colors.white,
                             child: const Text('Request New Account',
-                                style: TextStyle(fontSize: 18)),
+                                style: TextStyle(fontSize: 16)),
                           ),
                           RaisedButton(
                             shape: RoundedRectangleBorder(
@@ -107,7 +107,7 @@ class LoginView extends StatelessWidget {
                             textColor: Colors.white,
                             color: Colors.blue,
                             child:
-                            const Text('Login', style: TextStyle(fontSize: 18)),
+                            const Text('Login', style: TextStyle(fontSize: 16)),
                           )
                         ])
                   ],
