@@ -15,16 +15,24 @@ class LoginView extends StatelessWidget {
       viewModelBuilder: () => LoginViewModel(),
       builder: (context, model, child) => Scaffold(
         body: Container(
-            padding: const EdgeInsets.all(50.0),
+          padding: EdgeInsets.only(top: 70, right: 40.0, left: 40.0),
             child: Form(
               key: _formKey,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 100,
+                    child: Center(child: Image.asset('assets/images/placeholder.jpg')),
+                  ),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("Username",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
                   SizedBox(height: 8),
                   TextFormField(
                     textInputAction: TextInputAction.next,
@@ -34,7 +42,7 @@ class LoginView extends StatelessWidget {
                         return "Enter your email";
                       }
                       if (RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                           .hasMatch(value)) {
                         return null;
                       }
@@ -47,16 +55,16 @@ class LoginView extends StatelessWidget {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                             borderSide:
-                                BorderSide(color: Colors.grey, width: 1)),
+                            BorderSide(color: Colors.grey, width: 1)),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                             borderSide:
-                                BorderSide(color: Colors.grey, width: 1))),
+                            BorderSide(color: Colors.grey, width: 1))),
                   ),
                   SizedBox(height: 30),
                   Text("Password",
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
                   SizedBox(height: 8),
                   TextFormField(
                     textInputAction: TextInputAction.go,
@@ -78,11 +86,11 @@ class LoginView extends StatelessWidget {
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                             borderSide:
-                                BorderSide(color: Colors.grey, width: 1)),
+                            BorderSide(color: Colors.grey, width: 1)),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                             borderSide:
-                                BorderSide(color: Colors.grey, width: 1))),
+                            BorderSide(color: Colors.grey, width: 1))),
                   ),
                   SizedBox(height: 16),
                   InkWell(
@@ -136,7 +144,9 @@ class LoginView extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white))))
                       ])
-                ],
+                ]), Center(child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [Image(height: 50, image: AssetImage("assets/images/placeholder.jpg"),), SizedBox(height: 8.0), Text("Copyright Might Oak Medical"), Row( mainAxisAlignment: MainAxisAlignment.center, children:[ Container( padding: EdgeInsets.all(8), child:InkWell(onTap: (){}, child: Text("Terms & Conditions", style:TextStyle(color: Colors.blue)) )), Container( padding: EdgeInsets.all(8), child:InkWell( onTap: (){}, child: Text("Privacy Policy", style:TextStyle(color: Colors.blue))))])] ))],
               ),
             )),
       ),
