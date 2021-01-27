@@ -1,3 +1,4 @@
+import 'package:LearningFlutter/login_view.dart';
 import 'package:LearningFlutter/settings_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -14,7 +15,9 @@ class SettingsView extends StatelessWidget {
           body: Center(
               child: RaisedButton.icon(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pushReplacement(context, MaterialPageRoute(
+                        builder: (context) =>
+                            LoginView()));
                   },
                   label: Text("Log Out"),
                   icon: Icon(Icons.logout)))),

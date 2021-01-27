@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'home.dart';
+import 'main_tab_controller.dart';
 import 'login_viewmodel.dart';
 
 class LoginView extends StatelessWidget {
@@ -13,134 +13,158 @@ class LoginView extends StatelessWidget {
     // ViewModelBuilder is what provides the view model to the widget tree.
     return ViewModelBuilder<LoginViewModel>.reactive(
       viewModelBuilder: () => LoginViewModel(),
-
-      ///onModelReady: (model) => model.loadData(),
       builder: (context, model, child) => Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Center(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    TextFormField(
-                      textInputAction: TextInputAction.next,
-                      controller: emailController,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Enter your email";
-                        }
-                        if (RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value)) {
-                          return null;
-                        }
-                        return "Please enter a valid email address";
-                      },
-                      decoration: InputDecoration(
-                          labelText: 'Email Address',
-                          labelStyle: TextStyle(color: Colors.black54),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0)),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0))),
-                    ),
-                    SizedBox(height: 30),
-                    TextFormField(
-                      textInputAction: TextInputAction.go,
-                      onFieldSubmitted: (value){
-                        this.login(model, context);
-                      },
-                      controller: pwController,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Enter your password";
-                        }
+        body: Container(
+            padding: const EdgeInsets.all(50.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Username",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                  SizedBox(height: 8),
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    controller: emailController,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Enter your email";
+                      }
+                      if (RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value)) {
                         return null;
-                      },
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: TextStyle(color: Colors.black54),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0)),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide:
-                              BorderSide(color: Colors.grey, width: 1.0))),
-                    ),
-                    FlatButton(
-                        onPressed: () {},
-                        textColor: Colors.green,
-                        child: Text(
-                          "Forgot Password?",
-                          style: TextStyle(decoration: TextDecoration.underline),
-                        )),
-                    SizedBox(height: 30),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5.0),
+                      }
+                      return "Please enter a valid email address";
+                    },
+                    decoration: InputDecoration(
+                        hintText: 'Email Address',
+                        isDense: true,
+                        labelStyle: TextStyle(color: Colors.black54),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 1)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 1))),
+                  ),
+                  SizedBox(height: 30),
+                  Text("Password",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                  SizedBox(height: 8),
+                  TextFormField(
+                    textInputAction: TextInputAction.go,
+                    onFieldSubmitted: (value) {
+                      this.login(model, context);
+                    },
+                    controller: pwController,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Enter your password";
+                      }
+                      return null;
+                    },
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        hintText: 'Password',
+                        isDense: true,
+                        labelStyle: TextStyle(color: Colors.black54),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 1)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 1))),
+                  ),
+                  SizedBox(height: 16),
+                  InkWell(
+                      onTap: () {},
+                      child: Text(
+                        "Forgot Password?",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.blue),
+                      )),
+                  SizedBox(height: 32),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                            height: 40,
+                            decoration: new BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                new BoxShadow(
+                                  color: Colors.black12,
+                                  offset: new Offset(0.0, 0),
+                                  blurRadius: 10.0,
+                                ),
+                              ],
                             ),
-                            onPressed: () {},
-                            color: Colors.white,
-                            child: const Text('Request New Account',
-                                style: TextStyle(fontSize: 16)),
-                          ),
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5.0),
+                            child: FlatButton(
+                                onPressed: () {},
+                                child: Text('New User',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold)))),
+                        Container(
+                            height: 40,
+                            decoration: new BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                new BoxShadow(
+                                  color: Colors.black12,
+                                  offset: new Offset(0.0, 0),
+                                  blurRadius: 10.0,
+                                ),
+                              ],
                             ),
-                            onPressed: () {
-                              this.login(model, context);
-                            },
-                            textColor: Colors.white,
-                            color: Colors.blue,
-                            child:
-                            const Text('Login', style: TextStyle(fontSize: 16)),
-                          )
-                        ])
-                  ],
-                ),
-              )),
-        ),
+                            child: FlatButton(
+                                onPressed: () {},
+                                child: Text('Log In',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white))))
+                      ])
+                ],
+              ),
+            )),
       ),
     );
   }
 
-  login(LoginViewModel model, BuildContext context){
+  login(LoginViewModel model, BuildContext context) {
     if (_formKey.currentState.validate()) {
-      model.logUserIn(
-          emailController.text, pwController.text)
-          .then((value) => {
-        if (value)
-          {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      Home()),
-            )
-          }else{
-          print(value),
-          this.showAlertDialog("Error", "An error has occurred please try again", "Ok", context)
-        }
-      });
+      model.logUserIn(emailController.text, pwController.text).then((value) => {
+            if (value)
+              {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MainTabController()))
+              }
+            else
+              {
+                print(value),
+                this.showAlertDialog("Error",
+                    "An error has occurred please try again", "Ok", context)
+              }
+          });
     }
   }
 
-  showAlertDialog(String title, String content, String buttonTitle, BuildContext context) {
-
+  showAlertDialog(
+      String title, String content, String buttonTitle, BuildContext context) {
     // set up the button
     Widget okButton = FlatButton(
       child: Text(buttonTitle),
